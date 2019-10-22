@@ -49,6 +49,16 @@ int searchFor( String *string, char* searching ) {
     return 0;
 }
 
+int isNull( String *string ){
+    if(string == NULL){
+        return 1;
+    }
+    if(string->stuff == NULL){
+        return 1;
+    }
+    return 0;
+}
+
 String* newString( char *string ){
     String *s = (String*) malloc(sizeof(String));
     s->stuff = string;
@@ -67,11 +77,15 @@ void callback( void ){
 
 int main( void ){
     String *nome = newString("Fabio");
+    String *naoAlocado;
     printf("Nome: %s\n", nome->stuff);
     printf("Tamanho por metodo: %i\n", nome->length(nome->self));
     nome->forEach(nome->self, callback);
     callbackCounter = 0;
 
-    if(nome->searchFor(nome->self, "bio")) printf("Achei");
-    else printf("Nao achei");
+    if(nome->searchFor(nome->self, "bio")) printf("Achei\n");
+    else printf("Nao achei\n");
+
+    if(isNull(naoAlocado)) printf("nao alocado\n");
+    else printf("alocado\n");
 }
