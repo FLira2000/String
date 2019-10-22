@@ -7,6 +7,7 @@ typedef struct s{
     int (*length)(struct s*);
     void (*forEach)(struct s*, void (*lambda)( void ));
     int (*searchFor)(struct s*, char*);
+    int (*isBlank)(struct s*);
 }String;
 
 int stringLength(String *string){
@@ -49,6 +50,13 @@ int searchFor( String *string, char* searching ) {
     return 0;
 }
 
+int isBlank( String *string ){ //No sense in add this function to a 'object' that is not defined, lol
+    int i = 0;
+    for(i; string->stuff[i] != '\0'; i++);
+    if(i == 0) return 1;
+    else return 0;
+}
+
 int isNull( String *string ){
     if(string == NULL){
         return 1;
@@ -66,6 +74,7 @@ String* newString( char *string ){
     s->length = &stringLength;
     s->forEach = &forEach;
     s->searchFor = &searchFor;
+    s->isBlank = &isBlank;
     return s;
 }
 
@@ -78,6 +87,7 @@ void callback( void ){
 int main( void ){
     String *nome = newString("Fabio");
     String *naoAlocado;
+    String *alocadoVazio = newString("");
     printf("Nome: %s\n", nome->stuff);
     printf("Tamanho por metodo: %i\n", nome->length(nome->self));
     nome->forEach(nome->self, callback);
@@ -88,4 +98,8 @@ int main( void ){
 
     if(isNull(naoAlocado)) printf("nao alocado\n");
     else printf("alocado\n");
+
+    if(alocadoVazio->isBlank(alocadoVazio->self)) printf("vazio\n");
+    else printf("com coisa dentro\n");
+    
 }
