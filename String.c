@@ -29,6 +29,7 @@ typedef struct s{
     */
     int (*searchFor)(struct s*, char*); 
     int (*isBlank)(struct s*);
+    int (*isEqual)(struct s*, char*);
 }String;
 
 //Method creation
@@ -100,6 +101,15 @@ int isNull( String *string ){
     return 0;
 }
 
+int isEqual( String *string1, char *string2 ){
+    int i = 0;
+    if(string1->length(string1->self) != localLength(string2)) return 0;
+    for(i; string1->stuff[i] != '\0'; i++){
+        if(string1->stuff[i] != string2[i]) return 0;
+    }
+    return 1;
+}
+
 //Constructor. Receives the stuff in characters to fill the object that will be created.
 String* newString( char *string ){
     String *s = (String*) malloc(sizeof(String));
@@ -109,6 +119,7 @@ String* newString( char *string ){
     s->forEach = &forEach;
     s->searchFor = &searchFor;
     s->isBlank = &isBlank;
+    s->isEqual = &isEqual;
     return s;
 }
 
@@ -135,5 +146,8 @@ int main( void ){
 
     if(alocadoVazio->isBlank(alocadoVazio->self)) printf("vazio\n");
     else printf("com coisa dentro\n");
+
+    if(nome->isEqual(nome->self, "Fabio")) printf("igual");
+    else printf("diferente");
     
 }
