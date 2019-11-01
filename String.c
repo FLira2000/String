@@ -1,38 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-//This is the 'class' itself
-typedef struct s{ 
-    char *stuff;
-    struct s* self;
-    /*  
-    Ok, now this could be confusing. Look wisely: the 'methods' over here are not more than pointers - they are initialized
-    as a pointer receiving an address, and setted as a pointer itself.
-    Remember this: p->stuff <==> (*p).stuff
-    So, as I cannot type p.method(parameter) because it was constructed as a pointer, we assume that the initializazion
-    of those methods must seek the same way of acessing members with the 'member access dot'(see above, the right one).
-    Creating a member that is a (*pointer) is the way that we access the references of this pointer inside a struct or
-    union, because here we just need the additional information of this pointer, which is a function reference - will 
-    expects parameters too, not just a simple pointer to a primitive data type.
-    Now, if I write (*method)(parameter, parameter2) I'm acessing a function pointer, and executing it passing the
-    parameters. Note the similarity with the members below. Note too that I've created the member, and instead of setting
-    the names of the parameters variables, I wrote the datatypes only. 'Why?' Simple. If this is a representation of a 
-    data type, I can't label it's values, just reasemble them. It just expect a data type, not the variable name.  
-    */
-    int (*length)(struct s*); 
-    void (*forEach)(struct s*, void (*lambda)( void )); //You can ask yourself why there's a name 'lambda' here.
-    /*
-    Read the last part of the bible above and take a moment. To create a function pointer, you must give to it a name,
-    as I've done in the previous member. But, pay attention, here we have (*forEach)(parameters), and inside the parameters, 
-    the same labeled 'lambda'. Resuming, this method expects a function as a parameter, which is the meaning of lambda.
-    You should take a look in lambda functions by yourself to understand why this name shouldn't be 'lambda'.
-    */
-    int (*searchFor)(struct s*, char*); 
-    int (*isBlank)(struct s*);
-    int (*isEqual)(struct s*, char*);
-}String;
-
-//Method creation
+#include "String.h"
 
 //Count the length of a string inside the object String. Access the 'stuff' member.
 int stringLength(String *string){ 
@@ -101,6 +69,7 @@ int isNull( String *string ){
     return 0;
 }
 
+//Receives the String object itself, and a char array, to compare then. Returns 1 if they are equal, or 0 if not.
 int isEqual( String *string1, char *string2 ){
     int i = 0;
     if(string1->length(string1->self) != localLength(string2)) return 0;
@@ -121,33 +90,4 @@ String* newString( char *string ){
     s->isBlank = &isBlank;
     s->isEqual = &isEqual;
     return s;
-}
-
-int callbackCounter = 0;
-
-void callback( void ){
-    printf("callback chamada pela %i vez\n", ++callbackCounter);
-}
-
-int main( void ){
-    String *nome = newString("Fabio");
-    String *naoAlocado;
-    String *alocadoVazio = newString("");
-    printf("Nome: %s\n", nome->stuff);
-    printf("Tamanho por metodo: %i\n", nome->length(nome->self));
-    nome->forEach(nome->self, callback);
-    callbackCounter = 0;
-
-    if(nome->searchFor(nome->self, "bio")) printf("Achei\n");
-    else printf("Nao achei\n");
-
-    if(isNull(naoAlocado)) printf("nao alocado\n");
-    else printf("alocado\n");
-
-    if(alocadoVazio->isBlank(alocadoVazio->self)) printf("vazio\n");
-    else printf("com coisa dentro\n");
-
-    if(nome->isEqual(nome->self, "Fabio")) printf("igual");
-    else printf("diferente");
-    
 }
