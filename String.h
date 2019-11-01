@@ -1,5 +1,9 @@
+/*
 
-//This is the 'class' itself
+                Under MIT CopyRight for Fábio Guimarães Lira Filho(@FLira2000)
+                            String Library 2019
+
+*/
 typedef struct s{ 
     char *stuff;
     struct s* self;
