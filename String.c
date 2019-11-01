@@ -21,9 +21,6 @@ void forEach( String *string, void (*lambda)( void ) ){
     int i = 0;
     for(i; string->stuff[i] != '\0'; i++){
         lambda();
-        /*
-            Pretty simple to understand when you are looking to it.
-        */
     }
 }
 
