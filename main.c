@@ -26,6 +26,9 @@ int main( void ){
     if(alocadoVazio->isBlank(alocadoVazio->self)) printf("vazio\n");
     else printf("com coisa dentro\n");
 
-    if(nome->isEqual(nome->self, "Fabio")) printf("igual");
-    else printf("diferente");   
+    if(nome->isEqual(nome->self, "Fabio")) printf("igual\n");
+    else printf("diferente\n");   
+
+    alocadoVazio->concat(alocadoVazio->self, nome);
+    printf("%s concatenado\n", alocadoVazio->stuff);
 }

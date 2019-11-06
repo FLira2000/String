@@ -21,6 +21,9 @@ typedef struct s{
     int (*isBlank)(struct s*);
     //Receives the String object itself, and a char array, to compare then. Returns 1 if they are equal, or 0 if not.
     int (*isEqual)(struct s*, char*);
+    //Concatenate a string to another.
+    void (*concat)(struct s*, struct s*);
+
 }String;
 
 int stringLength(String *string);
@@ -34,5 +37,7 @@ int isBlank( String *string );
 int isNull( String *string );
 
 int isEqual( String *string1, char *string2 );
+
+void concat( String *destiny, String *toAdd);
 
 String* newString( char *string );
