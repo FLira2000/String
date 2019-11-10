@@ -31,4 +31,7 @@ int main( void ){
 
     alocadoVazio->concat(alocadoVazio->self, nome);
     printf("%s concatenado\n", alocadoVazio->stuff);
+
+    alocadoVazio->setString(alocadoVazio,"Nao esta mais vazio");
+    printf("%s \n", alocadoVazio->stuff);
 }

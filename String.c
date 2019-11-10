@@ -94,6 +94,12 @@ void concat( String *toReceive, String *toAdd){
     toReceive->stuff = newP;
 }
 
+//Recieves the String object itself and a char array to set the value of array on object.
+void setString(String *string, char *charArray){
+    free(string);
+    string = newString(charArray);
+}
+
 //Constructor. Receives the stuff in characters to fill the object that will be created.
 String* newString( char *string ){
     String *s = (String*) malloc(sizeof(String));
@@ -105,5 +111,6 @@ String* newString( char *string ){
     s->isBlank = &isBlank;
     s->isEqual = &isEqual;
     s->concat = &concat;
+    s->setString = &setString;
     return s;
 }

@@ -1,8 +1,6 @@
 /*
-
-                Under MIT CopyRight for Fábio Guimarães Lira Filho(@FLira2000)
-                            String Library 2019
-
+    Under MIT CopyRight for Fábio Guimarães Lira Filho(@FLira2000)
+    String Library 2019
 */
 
 //The 'Class' itself.
@@ -23,7 +21,8 @@ typedef struct s{
     int (*isEqual)(struct s*, char*);
     //Concatenate a string to another.
     void (*concat)(struct s*, struct s*);
-
+    //Recieves the String object itself and a char array to set the value of array on object.
+    void (*setString)(struct s*, char*);
 }String;
 
 int stringLength(String *string);
@@ -39,5 +38,7 @@ int isNull( String *string );
 int isEqual( String *string1, char *string2 );
 
 void concat( String *destiny, String *toAdd);
+
+void setString(String *string, char *charArray);
 
 String* newString( char *string );
