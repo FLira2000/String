@@ -96,8 +96,9 @@ void concat( String *toReceive, String *toAdd){
 
 //Recieves the String object itself and a char array to set the value of array on object.
 void setString(String *string, char *charArray){
-    free(string);
-    string = newString(charArray);
+    if(!isNull(string)){
+        string->stuff = charArray;
+    }
 }
 
 //Constructor. Receives the stuff in characters to fill the object that will be created.
