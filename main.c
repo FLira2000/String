@@ -34,4 +34,10 @@ int main( void ){
 
     alocadoVazio->setString(alocadoVazio,"Nao esta mais vazio");
     printf("%s \n", alocadoVazio->stuff);
+    alocadoVazio->forEach(alocadoVazio->self,  ({
+        void lambda( void ){ printf("sou uma lambda");} //probably will show an error, but is correct.
+        lambda;
+    })
+    );
+
 }
