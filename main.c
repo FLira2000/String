@@ -34,10 +34,13 @@ int main( void ){
 
     alocadoVazio->setString(alocadoVazio,"Nao esta mais vazio");
     printf("%s \n", alocadoVazio->stuff);
+
     alocadoVazio->forEach(alocadoVazio->self,  ({
-        void lambda( void ){ printf("sou uma lambda");} //probably will show an error, but is correct.
+        void lambda( void ){ printf("sou uma lambda\n");} //probably will show an error, but is correct.
         lambda;
     })
     );
 
+       
+    puts(nome->exportString(nome->self)); printf(" mostrado com ponteiro extraido \n");
 }

@@ -24,6 +24,8 @@ typedef struct s
     void (*concat)(struct s *, struct s *);
     //Receives the String object itself and a char array to set the value of array on object.
     void (*setString)(struct s *, char *);
+    //Exports a char pointer(the string itself) to the caller. 
+    char* (*exportString)(struct s *);
 } String;
 
 int stringLength(String *string);
@@ -41,5 +43,7 @@ int isEqual(String *string1, char *string2);
 void concat(String *destiny, String *toAdd);
 
 void setString(String *string, char *charArray);
+
+char* exportString(String *string);
 
 String *newString(char *string);

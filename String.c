@@ -101,6 +101,14 @@ void setString(String *string, char *charArray){
     }
 }
 
+char* exportString(String *string){
+    char *s = (char*) calloc(sizeof(char), string->length(string->self));
+    for(int i = 0; i <= string->length(string->self); i++){
+        s[i] = string->stuff[i];
+    }
+    return s;
+}
+
 //Constructor. Receives the stuff in characters to fill the object that will be created.
 String* newString( char *string ){
     String *s = (String*) malloc(sizeof(String));
@@ -113,5 +121,6 @@ String* newString( char *string ){
     s->isEqual = &isEqual;
     s->concat = &concat;
     s->setString = &setString;
+    s->exportString = &exportString;
     return s;
 }
