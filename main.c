@@ -41,6 +41,6 @@ int main( void ){
     })
     );
 
-       
-    puts(nome->exportString(nome->self)); printf(" mostrado com ponteiro extraido \n");
+    char * newNome = nome->exportString(nome->self);
+    printf("%s", newNome); 
 }
