@@ -76,6 +76,39 @@ int isEqual( String *string1, char *string2 ){
     return 1;
 }
 
+//Concatenate a string to another.
+void concat( String *toReceive, String *toAdd){
+    int newSize = (toReceive->length(toReceive->self));
+    newSize+= toAdd->length(toAdd->self);
+    char *newP = (char*)  calloc(sizeof(char), newSize);
+
+    int i = 0;
+    for(i; i < toReceive->length(toReceive->self); i++){
+        if(toReceive->stuff[i] != '\0')
+            newP[i] = toReceive->stuff[i];
+    }
+    for(i; (i - toReceive->length(toReceive->self)) < toAdd->length(toAdd->self); i++){
+        newP[i] = toAdd->stuff[i - toReceive->length(toReceive->self)];
+    }
+
+    toReceive->stuff = newP;
+}
+
+//Recieves the String object itself and a char array to set the value of array on object.
+void setString(String *string, char *charArray){
+    if(!isNull(string)){
+        string->stuff = charArray;
+    }
+}
+
+char* exportString(String *string){
+    char *s = (char*) calloc(sizeof(char), string->length(string->self));
+    for(int i = 0; i <= string->length(string->self); i++){
+        s[i] = string->stuff[i];
+    }
+    return s;
+}
+
 //Constructor. Receives the stuff in characters to fill the object that will be created.
 String* newString( char *string ){
     String *s = (String*) malloc(sizeof(String));
@@ -86,5 +119,8 @@ String* newString( char *string ){
     s->searchFor = &searchFor;
     s->isBlank = &isBlank;
     s->isEqual = &isEqual;
+    s->concat = &concat;
+    s->setString = &setString;
+    s->exportString = &exportString;
     return s;
 }

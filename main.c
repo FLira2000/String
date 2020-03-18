@@ -26,6 +26,21 @@ int main( void ){
     if(alocadoVazio->isBlank(alocadoVazio->self)) printf("vazio\n");
     else printf("com coisa dentro\n");
 
-    if(nome->isEqual(nome->self, "Fabio")) printf("igual");
-    else printf("diferente");   
+    if(nome->isEqual(nome->self, "Fabio")) printf("igual\n");
+    else printf("diferente\n");   
+
+    alocadoVazio->concat(alocadoVazio->self, nome);
+    printf("%s concatenado\n", alocadoVazio->stuff);
+
+    alocadoVazio->setString(alocadoVazio,"Nao esta mais vazio");
+    printf("%s \n", alocadoVazio->stuff);
+
+    alocadoVazio->forEach(alocadoVazio->self,  ({
+        void lambda( void ){ printf("sou uma lambda\n");} //probably will show an error, but is correct.
+        lambda;
+    })
+    );
+
+    char * newNome = nome->exportString(nome->self);
+    printf("%s", newNome); 
 }
