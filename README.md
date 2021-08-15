@@ -44,6 +44,9 @@ To configure:
 ![VSCode showing you my comments](https://github.com/FLira2000/String/blob/master/assets/vscode%20print.png)
 3. To 'execute', you must have the [MinGW C Language compiler](http://www.mingw.org/) installed in yout machine. Use the command ```gcc main.c String.h String.c -o main.exe``` - actually, you can use any name for the executable, but the 'main.exe' is already set in the `.gitignore`. 
 
+#UPDATE 
+So, I migrated to Linux some time ago, and now I'm `gcc` direct compilations.
+
 So, with this setted, you can just open a new issue, and work on it. But, please create a good issue.
 Also, I recommend the [git flow](https://danielkummer.github.io/git-flow-cheatsheet/index.html) method of team-coding. 
 
